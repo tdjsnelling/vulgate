@@ -4,8 +4,7 @@
 }
 
 :root {
-  /*--background: rgb(222, 214, 191);*/
-  --background: rgb(190, 180, 160);
+  --background: rgb(232, 209, 165);
   --foreground: rgb(40, 35, 30);
   --initial: rgb(138, 36, 45);
   --accent: rgb(189, 101, 80);
@@ -45,7 +44,7 @@ body {
   word-spacing: -0.125em;
   letter-spacing: -0.01em;
   text-shadow: 0 0 3px currentColor;
-  filter: url(#grain);
+  filter: url(#grain) url(#ink);
 }
 
 #__next {

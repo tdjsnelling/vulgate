@@ -7,8 +7,7 @@ export default function Home() {
   return (
     <div className={styles.Home}>
       <h1>Vulgate</h1>
-      <h2>Read the Bible like it’s 1454!</h2>
-
+      <h2>Read the Bible like it’s 1454</h2>
       <div className={styles.Contents}>
         <ul className={styles.Books}>
           {contents.slice(0, 46).map((book) => (
@@ -25,6 +24,9 @@ export default function Home() {
           ))}
         </ul>
       </div>
+      <a className={styles.Author} href="https://tdjs.tech" target="_blank">
+        tdjs.tech
+      </a>
     </div>
   );
 }

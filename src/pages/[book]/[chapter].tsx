@@ -98,7 +98,7 @@ export default function Chapter({ book, chapter, text, prev, next }) {
 
     setTimeout(() => {
       markWrappers();
-    }, 100);
+    }, 0);
 
     function markWrappersTimeout() {
       if (makeWrappersTimeoutRef.current) {
@@ -129,6 +129,9 @@ export default function Chapter({ book, chapter, text, prev, next }) {
         <p id="content">{text}</p>
       </div>
       <Nav prev={prev} next={next} />
+      <a className={styles.Author} href="https://tdjs.tech" target="_blank">
+        tdjs.tech
+      </a>
     </>
   );
 }

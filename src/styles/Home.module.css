@@ -27,7 +27,7 @@
   grid-template-columns: 1fr;
   grid-gap: var(--space-lg);
   font-size: var(--font-size-manuscript);
-  margin: 0 auto;
+  margin-bottom: var(--space-lg);
 
   @media screen and (min-width: 700px) {
     grid-template-columns: repeat(2, max-content);
@@ -37,4 +37,8 @@
 .Books {
   list-style: none;
   text-align: left;
+}
+
+.Author {
+  font-size: var(--font-size-manuscript);
 }

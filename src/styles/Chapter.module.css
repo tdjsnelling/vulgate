@@ -84,3 +84,14 @@
     padding: var(--space-lg);
   }
 }
+
+.Author {
+  display: block;
+  font-size: var(--font-size-manuscript);
+  text-align: center;
+  padding: var(--space-sm);
+
+  @media screen and (min-width: 700px) {
+    padding: var(--space-lg);
+  }
+}
