@@ -10,7 +10,16 @@
   --initial: rgb(138, 36, 45);
   --accent: rgb(189, 101, 80);
 
+  --space-lg: 50px;
+
+  --size-max: 1130px;
+
   --font-johannes: JohannesG;
+
+  --font-size-manuscript: 40px;
+  --font-size-heading: 60px;
+
+  --line-height-manuscript: 1.1;
 }
 
 html,
@@ -26,10 +35,25 @@ body {
   font-family: var(--font-johannes);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  line-height: var(--line-height-manuscript);
+  word-spacing: -0.125em;
+  letter-spacing: -0.01em;
+  text-shadow: 0 0 3px currentColor;
+  filter: url(#grain);
 }
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+a {
+  color: var(--foreground);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--initial)
+  }
 }

@@ -1,8 +1,32 @@
 .Home {
-  padding: 50px;
+  padding: var(--space-lg);
 
   & h1 {
-    font-size: 60px;
-    text-align: center;
+    font-size: var(--font-size-heading);
+    font-weight: normal;
+    margin-bottom: var(--space-lg);
+
+    &:first-letter {
+      color: var(--initial)
+    }
   }
+
+  & h2 {
+    font-size: var(--font-size-manuscript);
+    font-weight: normal;
+    margin-bottom: var(--space-lg);
+  }
+}
+
+.Contents {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  grid-gap: var(--space-lg);
+  font-size: var(--font-size-manuscript);
+  margin: 0 auto;
+}
+
+.Books {
+  list-style: none;
+  text-align: left;
 }

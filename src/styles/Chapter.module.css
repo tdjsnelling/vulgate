@@ -1,41 +1,23 @@
-.Background {
-  position: absolute;
-  width: 100vw;
-  height: 100%;
-  min-height: 100%;
-  top: 0;
-  bottom: auto;
-  z-index: -1;
-  background-color: var(--background);
-  filter: url(#roughpaper);
-}
-
 .Manuscript {
-  font-size: 40px;
+  font-size: var(--font-size-manuscript);
   text-align: justify;
-  line-height: 1.1;
-  word-spacing: -0.125em;
-  letter-spacing: -0.01em;
   word-break: break-all;
-  max-width: 1130px;
+  max-width: var(--size-max);
   min-height: 100vh;
   margin: 0 auto;
-  padding: 50px;
+  padding: var(--space-lg);
   columns: 2;
-  column-gap: 80px;
-  text-shadow: 0 0 3px currentColor;
-  filter: url(#grain);
+  column-gap: calc(var(--font-size-manuscript) * 2);
 
   & h1 {
-    font-size: 60px;
+    font-size: var(--font-size-heading);
     font-weight: normal;
     text-align: center;
-    text-transform: capitalize;
-    margin-bottom: 50px;
+    margin-bottom: var(--space-lg);
   }
 
   & p > span:first-child {
-    font-size: 85px;
+    font-size: calc(var(--font-size-manuscript) * var(--line-height-manuscript) * 2 - 3px);
     line-height: 1;
     color: var(--initial);
     float: left;
@@ -51,6 +33,7 @@
 .Initial {
   display: inline-block;
   position: relative;
+  text-transform: uppercase;
 
   &::before {
     content: "";
@@ -80,4 +63,14 @@
     text-shadow: 0 0 3px currentColor;
     transform: rotate(-10deg);
   }
+}
+
+.Nav {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-size-manuscript);
+  text-align: center;
+  max-width: var(--size-max);
+  margin: 0 auto;
+  padding: var(--space-lg);
 }

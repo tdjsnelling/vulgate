@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "scrape": "esr src/scripts/scrape.mjs"
+    "scrape:chapters": "esr src/scripts/scrape-chapters.mjs",
+    "scrape:contents": "esr src/scripts/scrape-contents.mjs"
   },
   "dependencies": {
     "globby": "^14.0.2",

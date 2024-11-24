@@ -1,17 +1,17 @@
 import { useEffect, useRef } from "react";
+import Link from "next/link";
+import Head from "next/head";
 import fs from "node:fs";
 import { globby } from "globby";
 import styles from "@/styles/Chapter.module.css";
+import contents from "../../content/contents.json";
 
 function randomNumber(min: number, max: number): number {
   return Math.random() * (max - min) + min;
 }
-function capitalise(string: string): string {
-  return string.substring(0, 1).toUpperCase() + string.substring(1);
-}
 
-function unslugify(string) {
-  return string.replaceAll(/-([a-z])/g, " $1");
+export function slugify(string) {
+  return string.replaceAll(" ", "-").toLowerCase();
 }
 
 function formatCharacters() {
@@ -52,8 +52,6 @@ function formatCharacters() {
 }
 
 function markWrappers() {
-  console.log("resize");
-
   const spans: NodeListOf<HTMLSpanElement> =
     document.querySelectorAll("#content span");
 
@@ -74,7 +72,25 @@ function markWrappers() {
   }
 }
 
-export default function Chapter({ book, chapter, text }) {
+function Nav({ prev, next }) {
+  return (
+    <nav className={styles.Nav}>
+      {prev ? (
+        <Link href={prev.href}>{prev.name}</Link>
+      ) : (
+        <div style={{ width: "150px" }} />
+      )}
+      <Link href="/">Index</Link>
+      {next ? (
+        <Link href={next.href}>{next.name}</Link>
+      ) : (
+        <div style={{ width: "150px" }} />
+      )}
+    </nav>
+  );
+}
+
+export default function Chapter({ book, chapter, text, prev, next }) {
   const makeWrappersTimeoutRef = useRef<NodeJS.Timeout | undefined>();
 
   useEffect(() => {
@@ -98,46 +114,21 @@ export default function Chapter({ book, chapter, text }) {
     return () => {
       window.removeEventListener("resize", markWrappersTimeout);
     };
-  }, []);
+  }, [book, chapter]);
 
   return (
     <>
-      <svg height="0">
-        <filter id="roughpaper">
-          <feTurbulence
-            type="fractalNoise"
-            baseFrequency="0.005"
-            result="noise"
-            numOctaves="10"
-          />
-          <feDiffuseLighting
-            in="noise"
-            lightingColor="var(--background)"
-            surfaceScale="5"
-          >
-            <feDistantLight azimuth="110" elevation="60" />
-          </feDiffuseLighting>
-        </filter>
-        <filter id="grain">
-          <feTurbulence baseFrequency="0.75" result="colorNoise" />
-          <feColorMatrix
-            in="colorNoise"
-            type="matrix"
-            values=".33 .33 .33 0 0 .33 .33 .33 0 0 .33 .33 .33 0 0 0 0 0 1 0"
-            result="monoNoise"
-          />
-          <feComposite operator="out" in="SourceGraphic" in2="monoNoise" />
-        </filter>
-      </svg>
-
-      <div className={styles.Background} />
-
+      <Head>
+        <title>{`${book}: ${chapter} — Vulgate Bible`}</title>
+      </Head>
+      <Nav prev={prev} next={next} />
       <div className={styles.Manuscript}>
         <h1>
-          {unslugify(book)}: {chapter}
+          {book}: {chapter}
         </h1>
         <p id="content">{text}</p>
       </div>
+      <Nav prev={prev} next={next} />
     </>
   );
 }
@@ -149,11 +140,47 @@ export async function getStaticProps({
 }) {
   const text = fs.readFileSync(`src/content/${book}/${chapter}.txt`, "utf-8");
 
+  const thisBookIndex = (
+    contents as [{ name: string; chapters: string[] }]
+  ).findIndex((b) => slugify(b.name) === book);
+
+  const thisBook = contents[thisBookIndex];
+
+  const thisChapter = thisBook.chapters.findIndex((c) => c === chapter);
+
+  let prevBook = thisBook;
+  let nextBook = thisBook;
+
+  let prevChapter = thisBook.chapters[thisChapter - 1];
+  let nextChapter = thisBook.chapters[thisChapter + 1];
+
+  if (!prevChapter) {
+    prevBook = contents[thisBookIndex - 1];
+    if (prevBook) prevChapter = prevBook.chapters[prevBook.chapters.length - 1];
+  }
+
+  if (!nextChapter) {
+    nextBook = contents[thisBookIndex + 1];
+    if (nextBook) nextChapter = "1";
+  }
+
   return {
     props: {
-      book,
+      book: thisBook.name,
       chapter,
       text,
+      prev: prevChapter
+        ? {
+            name: `${prevBook.name}: ${prevChapter}`,
+            href: `/${slugify(prevBook.name)}/${prevChapter}`,
+          }
+        : null,
+      next: nextChapter
+        ? {
+            name: `${nextBook.name}: ${nextChapter}`,
+            href: `/${slugify(nextBook.name)}/${nextChapter}`,
+          }
+        : null,
     },
   };
 }
