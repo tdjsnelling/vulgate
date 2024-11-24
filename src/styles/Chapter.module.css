@@ -3,11 +3,14 @@
   text-align: justify;
   word-break: break-all;
   max-width: var(--size-max);
-  min-height: 100vh;
   margin: 0 auto;
-  padding: var(--space-lg);
-  columns: 2;
+  padding: var(--space-sm);
   column-gap: calc(var(--font-size-manuscript) * 2);
+
+  @media screen and (min-width: 700px) {
+    column-count: 2;
+    padding: var(--space-lg);
+  }
 
   & h1 {
     font-size: var(--font-size-heading);
@@ -27,7 +30,7 @@
 }
 
 .Char {
-  transform: rotate(var(--charRotation)) translate(var(--charTranslationX), var(--charTranslationY))
+  transform: rotate(var(--charRotation)) translate(var(--charTranslationX), var(--charTranslationY));
 }
 
 .Initial {
@@ -50,27 +53,34 @@
 }
 
 .WrapHere {
-  display: inline-block;
+  display: inline !important;
   position: relative;
 
   &::after {
     content: "=";
-    display: inline-block;
+    display: block;
     position: absolute;
     top: 0.1em;
     left: calc(100% + 1px);
+    color: var(--foreground);
     font-size: 0.9em;
     text-shadow: 0 0 3px currentColor;
-    transform: rotate(-10deg);
+    transform: rotate(calc(var(--charRotation) - 10deg));
   }
 }
 
 .Nav {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   font-size: var(--font-size-manuscript);
   text-align: center;
   max-width: var(--size-max);
   margin: 0 auto;
-  padding: var(--space-lg);
+  padding: var(--space-sm);
+
+  @media screen and (min-width: 700px) {
+    flex-direction: row;
+    padding: var(--space-lg);
+  }
 }

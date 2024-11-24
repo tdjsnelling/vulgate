@@ -1,5 +1,9 @@
 .Home {
-  padding: var(--space-lg);
+  padding: var(--space-sm);
+
+  @media screen and (min-width: 700px) {
+    padding: var(--space-lg);
+  }
 
   & h1 {
     font-size: var(--font-size-heading);
@@ -20,10 +24,14 @@
 
 .Contents {
   display: grid;
-  grid-template-columns: repeat(2, max-content);
+  grid-template-columns: 1fr;
   grid-gap: var(--space-lg);
   font-size: var(--font-size-manuscript);
   margin: 0 auto;
+
+  @media screen and (min-width: 700px) {
+    grid-template-columns: repeat(2, max-content);
+  }
 }
 
 .Books {

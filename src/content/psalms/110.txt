@@ -6,4 +6,4 @@ testamenti sui. Virtutem operum suorum adnuntiabit populo suo. Ut det illis here
 et iudicium. Fidelia omnia mandata eius confirmata in saeculum saeculi
 facta in veritate et aequitate. Redemptionem misit populo suo mandavit in aeternum
 testamentum suum sanctum et terribile nomen eius. Initium sapientiae timor Domini intellectus bonus omnibus
-facientibus eum laudatio eius manet in saeculum %saeculi;.
+facientibus eum laudatio eius manet in saeculum saeculi;.
