@@ -7,7 +7,7 @@
   padding: var(--space-sm);
   column-gap: calc(var(--font-size-manuscript) * 2);
 
-  @media screen and (min-width: 700px) {
+  @media screen and (min-width: 800px) {
     column-count: 2;
     padding: var(--space-lg);
   }
@@ -79,7 +79,7 @@
   margin: 0 auto;
   padding: var(--space-sm);
 
-  @media screen and (min-width: 700px) {
+  @media screen and (min-width: 800px) {
     flex-direction: row;
     padding: var(--space-lg);
   }
@@ -91,7 +91,7 @@
   text-align: center;
   padding: var(--space-sm);
 
-  @media screen and (min-width: 700px) {
+  @media screen and (min-width: 800px) {
     padding: var(--space-lg);
   }
 }

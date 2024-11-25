@@ -1,7 +1,7 @@
 .Home {
   padding: var(--space-sm);
 
-  @media screen and (min-width: 700px) {
+  @media screen and (min-width: 800px) {
     padding: var(--space-lg);
   }
 
@@ -29,7 +29,7 @@
   font-size: var(--font-size-manuscript);
   margin-bottom: var(--space-lg);
 
-  @media screen and (min-width: 700px) {
+  @media screen and (min-width: 800px) {
     grid-template-columns: repeat(2, max-content);
   }
 }

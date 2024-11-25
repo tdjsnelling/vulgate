@@ -21,7 +21,7 @@
 
   --line-height-manuscript: 1.1;
 
-  @media screen and (min-width: 700px) {
+  @media screen and (min-width: 800px) {
     --font-size-manuscript: 40px;
   }
 }
