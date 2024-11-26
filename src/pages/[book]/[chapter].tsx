@@ -3,6 +3,7 @@ import Link from "next/link";
 import Head from "next/head";
 import fs from "node:fs";
 import { globby } from "globby";
+import opentype from "opentype.js";
 import styles from "@/styles/Chapter.module.css";
 import contents from "../../content/contents.json";
 
@@ -14,7 +15,7 @@ export function slugify(string) {
   return string.replaceAll(" ", "-").toLowerCase();
 }
 
-function formatCharacters() {
+async function formatCharacters() {
   const content: HTMLParagraphElement = document.querySelector("#content");
 
   if (!content) return;
@@ -25,8 +26,34 @@ function formatCharacters() {
 
   let lastChar = "";
 
-  for (const char of chars) {
-    if (lastChar === "." && char !== " ") {
+  const buffer = fetch("/fonts/JohannesG.otf").then((res) => res.arrayBuffer());
+  const font = opentype.parse(await buffer);
+
+  for (let i = 0; i < chars.length; i++) {
+    const char = chars[i];
+
+    if (i === 0) {
+      const path = font.getPath(char, 0, 0, 170);
+      const bbox = path.getBoundingBox();
+
+      const w = bbox.x2 - bbox.x1;
+      const h = bbox.y2 - bbox.y1;
+
+      const dw = (200 - w) / 2;
+      const dh = (200 - h) / 2;
+
+      const tx = dw - bbox.x1;
+      const ty = dh - bbox.y1;
+
+      const d = path.toPathData();
+
+      html += `<div class="${styles.Dropcap}" style="--rotation: ${randomNumber(-1, 1)}deg">
+        <svg viewBox="0 0 200 200">
+          <path d="${d}" transform="translate(${tx}, ${ty})" />
+        </svg>
+      </div>
+      <span class="${styles.Invisible}">${char}</span>`;
+    } else if (lastChar === "." && char !== " ") {
       const style = [
         `--strokeRotation: ${randomNumber(-10, 10)}deg`,
         `--strokeHeight: ${randomNumber(0.6, 0.8)}em`,
@@ -98,7 +125,7 @@ export default function Chapter({ book, chapter, text, prev, next }) {
 
     setTimeout(() => {
       markWrappers();
-    }, 0);
+    }, 100);
 
     function markWrappersTimeout() {
       if (makeWrappersTimeoutRef.current) {

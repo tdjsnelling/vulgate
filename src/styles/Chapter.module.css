@@ -18,19 +18,32 @@
     text-align: center;
     margin-bottom: var(--space-lg);
   }
-
-  & p > span:first-child {
-    font-size: calc(var(--font-size-manuscript) * var(--line-height-manuscript) * 2 - 3px);
-    line-height: 1;
-    color: var(--initial);
-    float: left;
-    margin-top: 3px;
-    margin-right: 4px;
-  }
 }
 
 .Char {
   transform: rotate(var(--charRotation)) translate(var(--charTranslationX), var(--charTranslationY));
+}
+
+.Dropcap {
+  --size: calc(var(--font-size-manuscript) * var(--line-height-manuscript) * 6 - 18px);
+
+  width: var(--size);
+  height: var(--size);
+  background-image: url("/images/gold.jpg");
+  background-size: contain;
+  fill: var(--initial);
+  border-radius: 2px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  float: left;
+  margin-top: 10px;
+  margin-right: 10px;
+  transform: rotate(var(--rotation));
+  filter: url(#giltroughedge);
+
+  & path {
+    opacity: 0.9;
+    filter: url(#inkroughedge) drop-shadow(0 0 0.5px var(--foreground));
+  }
 }
 
 .Initial {
@@ -67,6 +80,12 @@
     text-shadow: 0 0 3px currentColor;
     transform: rotate(calc(var(--charRotation) - 10deg));
   }
+}
+
+.Invisible {
+  display: inline-block;
+  width: 1px;
+  opacity: 0;
 }
 
 .Nav {

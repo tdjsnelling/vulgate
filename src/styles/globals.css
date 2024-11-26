@@ -5,9 +5,10 @@
 
 :root {
   --background: rgb(232, 209, 165);
-  --foreground: rgb(40, 35, 30);
+  --foreground: rgb(10, 5, 0);
   --initial: rgb(138, 36, 45);
   --accent: rgb(189, 101, 80);
+  --dropcap: rgb(23, 48, 136);
 
   --space-sm: 25px;
   --space-lg: 50px;
@@ -19,7 +20,7 @@
   --font-size-manuscript: 30px;
   --font-size-heading: 60px;
 
-  --line-height-manuscript: 1.1;
+  --line-height-manuscript: 1.05;
 
   @media screen and (min-width: 800px) {
     --font-size-manuscript: 40px;
