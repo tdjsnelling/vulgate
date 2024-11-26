@@ -11,12 +11,13 @@ function randomNumber(min: number, max: number): number {
   return Math.random() * (max - min) + min;
 }
 
-export function slugify(string) {
+export function slugify(string: string): string {
   return string.replaceAll(" ", "-").toLowerCase();
 }
 
 async function formatCharacters() {
-  const content: HTMLParagraphElement = document.querySelector("#content");
+  const content: HTMLParagraphElement | null =
+    document.querySelector("#content");
 
   if (!content) return;
 
@@ -45,7 +46,7 @@ async function formatCharacters() {
       const tx = dw - bbox.x1;
       const ty = dh - bbox.y1;
 
-      const d = path.toPathData();
+      const d = path.toPathData(2);
 
       html += `<div class="${styles.Dropcap}" style="--rotation: ${randomNumber(-1, 1)}deg">
         <svg viewBox="0 0 200 200">
@@ -99,7 +100,12 @@ function markWrappers() {
   }
 }
 
-function Nav({ prev, next }) {
+type NavObject = {
+  name: string;
+  href: string;
+};
+
+function Nav({ prev, next }: { prev?: NavObject; next?: NavObject }) {
   return (
     <nav className={styles.Nav}>
       {prev ? (
@@ -117,7 +123,19 @@ function Nav({ prev, next }) {
   );
 }
 
-export default function Chapter({ book, chapter, text, prev, next }) {
+export default function Chapter({
+  book,
+  chapter,
+  text,
+  prev,
+  next,
+}: {
+  book: string;
+  chapter: string;
+  text: string;
+  prev?: NavObject;
+  next?: NavObject;
+}) {
   const makeWrappersTimeoutRef = useRef<NodeJS.Timeout | undefined>();
 
   useEffect(() => {

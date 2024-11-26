@@ -1,11 +1,12 @@
 import contents from "../content/contents.json";
 import { slugify } from "@/pages/[book]/[chapter]";
+import { GetServerSidePropsContext } from "next";
 
 export default function Sitemap() {
   return null;
 }
 
-export async function getServerSideProps({ res }) {
+export async function getServerSideProps({ res }: GetServerSidePropsContext) {
   const chapters = [];
 
   for (const book of contents) {
