@@ -1,7 +1,5 @@
 import Link from "next/link";
 import styles from "@/styles/Home.module.css";
-import { slugify } from "@/pages/[book]/[chapter]";
-import contents from "../content/contents.json";
 import Head from "next/head";
 
 export default function Error() {
