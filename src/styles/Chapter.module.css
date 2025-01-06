@@ -31,7 +31,7 @@
   height: var(--size);
   background-image: url("/images/gold.jpg");
   background-size: contain;
-  fill: var(--initial);
+  fill: var(--dropcap);
   border-radius: 2px;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   float: left;
@@ -42,7 +42,7 @@
 
   & path {
     opacity: 0.9;
-    filter: url(#inkroughedge) drop-shadow(0 0 0.5px var(--foreground));
+    filter: url(#inkroughedge) drop-shadow(0 0 1px var(--foreground));
   }
 }
 

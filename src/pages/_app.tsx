@@ -60,7 +60,7 @@ export default function App({ Component, pageProps }: AppProps) {
         </filter>
         <filter id="inkroughedge">
           <feTurbulence
-            baseFrequency="0.05"
+            baseFrequency="0.075"
             numOctaves="2"
             type="fractalNoise"
             seed={Math.random() * 100}
@@ -68,7 +68,7 @@ export default function App({ Component, pageProps }: AppProps) {
           />
           <feDisplacementMap
             in2="noise"
-            scale="4"
+            scale="3"
             result="map"
             xChannelSelector="R"
             in="SourceGraphic"

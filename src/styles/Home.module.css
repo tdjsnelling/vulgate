@@ -8,11 +8,8 @@
   & h1 {
     font-size: var(--font-size-heading);
     font-weight: normal;
+    color: var(--initial);
     margin-bottom: var(--space-lg);
-
-    &:first-letter {
-      color: var(--initial)
-    }
   }
 
   & h2 {

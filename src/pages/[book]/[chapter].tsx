@@ -174,8 +174,8 @@ export default function Chapter({
         <p id="content">{text}</p>
       </div>
       <Nav prev={prev} next={next} />
-      <a className={styles.Author} href="https://tdjs.tech" target="_blank">
-        tdjs.tech
+      <a className={styles.Author} href="https://tdjs.dev" target="_blank">
+        tdjs.dev
       </a>
     </>
   );
@@ -186,13 +186,31 @@ export async function getStaticProps({
 }: {
   params: { book: string; chapter: string };
 }) {
-  const text = fs.readFileSync(`src/content/${book}/${chapter}.txt`, "utf-8");
+  let text;
+
+  try {
+    text = fs.readFileSync(`src/content/${book}/${chapter}.txt`, "utf-8");
+  } catch (e) {
+    console.error(e);
+
+    return { notFound: true };
+  }
 
   const thisBookIndex = (
     contents as [{ name: string; chapters: string[] }]
   ).findIndex((b) => slugify(b.name) === book);
 
   const thisBook = contents[thisBookIndex];
+
+  if (!thisBook) {
+    return {
+      props: {
+        book,
+        chapter,
+        text,
+      },
+    };
+  }
 
   const thisChapter = thisBook.chapters.findIndex((c) => c === chapter);
 
